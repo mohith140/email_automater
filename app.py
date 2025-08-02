@@ -17,13 +17,20 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 def authenticate_gmail_from_upload(uploaded_json_str):
     creds = None
     try:
-        flow = InstalledAppFlow.from_client_config(
-            json.loads(uploaded_json_str),
-            scopes=SCOPES,
-            redirect_uri='http://localhost:8501'
-        )
-        creds = flow.run_console()
-        # creds = flow.run_local_server(port=0)
+        # flow = InstalledAppFlow.from_client_config(
+        #     json.loads(uploaded_json_str),
+        #     scopes=SCOPES,
+        #     redirect_uri='http://localhost:8501'
+        # )
+        # creds = flow.run_console()
+        # # creds = flow.run_local_server(port=0)
+      flow = InstalledAppFlow.from_client_config(
+      json.loads(uploaded_json_str),
+      scopes=SCOPES,
+      redirect_uri="https://your-app.streamlit.app/oauth2callback")
+auth_url, _ = flow.authorization_url(prompt='consent')
+ st.markdown(f"[Click here to login]({auth_url})")
+
     except Exception as e:
         st.error(f"Authentication failed: {e}")
         return None

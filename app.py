@@ -27,7 +27,7 @@ def authenticate_gmail_from_upload(uploaded_json_str):
       flow = InstalledAppFlow.from_client_config(
       json.loads(uploaded_json_str),
       scopes=SCOPES,
-      redirect_uri="https://your-app.streamlit.app/oauth2callback")
+      redirect_uri="https://emailautomater.streamlit.app/oauth2callback")
       auth_url, _ = flow.authorization_url(prompt='consent')
       st.markdown(f"[Click here to login]({auth_url})")
 

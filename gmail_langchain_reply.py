@@ -9,6 +9,8 @@ from googleapiclient.discovery import build
 
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+load_dotenv()  # Loads .env into os.environ
 
 # === Step 1: Gmail API Authentication ===
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
@@ -78,7 +80,8 @@ Write a concise, professional reply. Start with "Subject:" and then "Body:".
     llm = ChatGroq(
     temperature=0.3,
     model_name="llama3-8b-8192",  # or "mixtral-8x7b-32768", etc.
-    groq_api_key="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"  # or set via environment variable
+    groq_api_key=os.getenv("GROQ_API_KEY")
+  # or set via environment variable
      )
     
     return llm(messages).content

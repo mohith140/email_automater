@@ -22,7 +22,7 @@ def authenticate_gmail_from_upload(uploaded_json_str):
             scopes=SCOPES,
             redirect_uri='http://localhost:8501'
         )
-        creds = flow.run_local_server(port=0)
+        creds = flow.run_console()
         # creds = flow.run_local_server(port=0)
     except Exception as e:
         st.error(f"Authentication failed: {e}")
@@ -35,7 +35,7 @@ if uploaded_file and "gmail_service" not in st.session_state:
     uploaded_json_str = uploaded_file.read().decode("utf-8")
     st.title("📧 Gmail Assistant")
     st.title("✉️ Smart Gmail Reply Draft with Groq")
-
+    st.info("You'll be redirected to log in via browser after clicking below button. After granting access, copy and paste the auth code back into the terminal if prompted.")
     if st.button("🔐 Login with Gmail"):
         x = authenticate_gmail_from_upload(uploaded_json_str)
         print(x, "x logging")

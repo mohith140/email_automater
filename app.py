@@ -48,7 +48,7 @@ if uploaded_file and "gmail_service" not in st.session_state:
         print(x, "x logging")
         if x[0]:
             st.session_state.gmail_service = x[0]
-            st.session_state.gmail_creds = x[1].to_json()  # store safely
+            st.session_state.gmail_creds = x[1]   # store safely
             st.success("✅ Gmail authenticated successfully!")
 
 # -------------------

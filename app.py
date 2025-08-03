@@ -27,17 +27,13 @@ def authenticate_gmail_from_upload(uploaded_json_str):
       flow = InstalledAppFlow.from_client_config(
       json.loads(uploaded_json_str),
       scopes=SCOPES,
-      redirect_uri="https://emailautomater.streamlit.app/")
-      auth_url, _ = flow.authorization_url(prompt='consent')
-      st.markdown(f"[Click here to login]({auth_url})")
       creds = flow.run_console()
+      service = build('gmail', 'v1', credentials=creds)
+      return [service, creds]
 
     except Exception as e:
         st.error(f"Authentication failed: {e}")
         return None
-    print("authetication details")
-    print(build('gmail', 'v1', credentials=creds),creds)
-    return [build('gmail', 'v1', credentials=creds), creds]
 
 uploaded_file = st.file_uploader("Upload your credentials.json", type="json")
 

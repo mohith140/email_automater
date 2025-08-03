@@ -34,6 +34,7 @@ def authenticate_gmail_from_upload(uploaded_json_str):
     except Exception as e:
         st.error(f"Authentication failed: {e}")
         return None
+    print("authetication details")
     print(build('gmail', 'v1', credentials=creds),creds)
     return [build('gmail', 'v1', credentials=creds), creds]
 

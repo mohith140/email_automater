@@ -71,8 +71,9 @@ if "gmail_service" in st.session_state:
 # -------------------
 if "email_text" in st.session_state:
     if st.button("💡 Generate Reply"):
-        reply = generate_reply(st.session_state.email_text)
-
+        MAX_LENGTH = 5000  # or any safe number to avoid hitting 6000 tokens with context
+        shortened_email = st.session_state.email_text[:MAX_LENGTH]
+        reply = generate_reply(shortened_email)
         subject_match = re.search(r"Subject:\s*(.*)", reply)
         body_match = re.search(r"Body:\s*(.*)", reply, re.DOTALL)
         subject = subject_match.group(1).strip() if subject_match else ""

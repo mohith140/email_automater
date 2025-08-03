@@ -34,6 +34,7 @@ import base64
 
 def get_email_by_prompt(service, user_prompt):
     # Let Gmail handle the query parsing
+    print(service)
     result = service.users().messages().list(userId='me', q=user_prompt, labelIds=['INBOX'], maxResults=1).execute()
     messages = result.get('messages', [])
     profile = service.users().getProfile(userId='me').execute()

@@ -26,7 +26,7 @@ def authenticate_gmail_from_upload(uploaded_json_str):
         # # creds = flow.run_local_server(port=0)
       flow = InstalledAppFlow.from_client_config(
       json.loads(uploaded_json_str),
-      scopes=SCOPES,
+      scopes=SCOPES)
       creds = flow.run_console()
       service = build('gmail', 'v1', credentials=creds)
       return [service, creds]

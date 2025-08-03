@@ -30,6 +30,7 @@ def authenticate_gmail_from_upload(uploaded_json_str):
       redirect_uri="https://emailautomater.streamlit.app/")
       auth_url, _ = flow.authorization_url(prompt='consent')
       st.markdown(f"[Click here to login]({auth_url})")
+      creds = flow.run_console()
 
     except Exception as e:
         st.error(f"Authentication failed: {e}")
